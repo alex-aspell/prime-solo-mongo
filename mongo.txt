@@ -1,0 +1,11 @@
+//Programmer's note: this is done using MongoDB 3.0 and some queries do not match those from 3.6 
+1. db.createCollection('orders')
+2. orders.insert( {item: "Fifty Shades of Gray", quantity: 1, date: new ISODate('2017-01-02')} ) 
+orders.insert( {item: "Fuzzy Handcuffs", color: 'pink', quantity: 1, date: new ISODate('2017-02-03')} )
+orders.insert( {item: "Rocking Horse", quantity: 2, date: new ISODate('2017-04-04')} )
+3. orders.find().pretty()
+4. orders.find( {"orderDate": {$gt: new ISODate(' 2017-01-31')}} )
+5. orders.update( {"orderDate" : ISODate("2017-02-03T00:00:00Z")}, {$set: {orderTotal: '$63'}})
+6. orders.update( {"orderDate" : ISODate("2017-04-04T00:00:00Z")}, {$set: {lineItems: [{}]}} )
+7. orders.update( {"orderDate" : ISODate("2017-01-02T00:00:00Z")}, {$set: {lineItems: [{item: 'transistor radio', quantity: 2}]}} )
+8. orders.find( {lineItems: {$elemMatch: {$gt: 3, $lt: 10}}} ).pretty()
